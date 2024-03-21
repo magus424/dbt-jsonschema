@@ -198,6 +198,27 @@
       },
       "additionalProperties": false
     },
+    "hook": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/array_of_strings"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sql": {
+              "type": "string"
+            },
+            "transaction": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
     "invalidate_hard_deletes": {
       "$ref": "#/$defs/boolean_or_jinja_string"
     },
@@ -258,6 +279,42 @@
       "type": "object",
       "description": "Configurations set in the dbt_project.yml file will apply to all models that don't have a more specific configuration set.",
       "properties": {
+        "+buckets": {
+          "type": "number"
+        },
+        "+catalog": {
+          "$ref": "#/$defs/database"
+        },
+        "+clustered_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
+        "+liquid_clustered_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
+        "+location_root": {
+          "$ref": "#/$defs/location"
+        },
+        "+partition_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
+        "buckets": {
+          "type": "number"
+        },
+        "catalog": {
+          "$ref": "#/$defs/database"
+        },
+        "clustered_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
+        "liquid_clustered_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
+        "location_root": {
+          "$ref": "#/$defs/location"
+        },
+        "partition_by": {
+          "$ref": "#/$defs/string_or_array_of_strings"
+        },
         "+alias": {
           "$ref": "#/$defs/alias"
         },
@@ -317,10 +374,10 @@
           "$ref": "#/$defs/persist_docs_config"
         },
         "+post-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "+pre-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "+schema": {
           "$ref": "#/$defs/schema"
@@ -393,10 +450,10 @@
           "$ref": "#/$defs/persist_docs_config"
         },
         "post-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "pre-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "schema": {
           "$ref": "#/$defs/schema"
@@ -552,10 +609,10 @@
           "$ref": "#/$defs/persist_docs_config"
         },
         "+post-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "+pre-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "+quote_columns": {
           "$ref": "#/$defs/boolean_or_jinja_string"
@@ -603,10 +660,10 @@
           "$ref": "#/$defs/persist_docs_config"
         },
         "post-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "pre-hook": {
-          "$ref": "#/$defs/array_of_strings"
+          "$ref": "#/$defs/hook"
         },
         "quote_columns": {
           "$ref": "#/$defs/boolean_or_jinja_string"
